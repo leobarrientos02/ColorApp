@@ -11,7 +11,6 @@
   src: url(./fonts/Lato/Lato-Regular.ttf);
 }
 html {
-  font-size: 62.5%;
   scroll-behavior: smooth;
 }
 body {
@@ -29,7 +28,6 @@ svg {
 .colors {
   height: 80vh;
   display: flex;
-  flex-wrap: wrap;
   color: rgb(212, 212, 212);
 }
 .color {
@@ -52,13 +50,14 @@ svg {
   position: absolute;
   bottom: 0%;
   background: white;
+  opacity: 0;
   padding: 1rem;
   width: 80%;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   pointer-events: none;
   /* Adjustment Class */
-  transform: translate(100px);
+  transform: translateY(100px);
   transition: all 0.5s ease-in-out;
 }
 .sliders.active {
@@ -76,9 +75,44 @@ svg {
   border: none;
   background: rgb(73, 73, 73);
   color: white;
+  cursor: pointer;
   font-weight: bold;
 }
 .controls {
   display: flex;
   flex-direction: column;
+}
+.panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 20vh;
+}
+.panel button {
+  font-size: 1.2rem;
+  margin: 1rem;
+  padding: 1rem 2rem;
+  background: rgb(31, 33, 63);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+.panel p {
+  font-size: 1.2rem;
+}
+.library-panel,
+.generate-panel,
+.save-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.adjust,
+.lock {
+  font-size: 2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 2rem 0rem;
 }
