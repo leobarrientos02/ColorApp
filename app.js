@@ -4,6 +4,7 @@ const generateBtn = document.querySelector(".generate");
 const sliders = document.querySelectorAll("input[type='range");
 const currentHexes = document.querySelectorAll(".color h2");
 let initialColors;
+
 //Functions
 function generateHex() {
   const hexColor = chroma.random();
@@ -16,9 +17,10 @@ function generateHex() {
   }
   return hash;
 */
-}
-//let randomHex = generateHex();
-//console.log(randomHex);
+} // Function generateHex() Ends
+
+//let randomHex = generateHex(); TEST
+//console.log(randomHex); TEST
 
 function randomColors() {
   colorDivs.forEach((div, index) => {
@@ -26,13 +28,24 @@ function randomColors() {
     const randomColor = generateHex();
 
     //Add the color to the background
-    div.style.backgroundColor = randomColor;
+    div.style.background = randomColor;
     hexText.innerText = randomColor;
 
-    //Check text contrast
+    // checkTextContrast(color, text) function Call
     checkTextContrast(randomColor, hexText);
-  });
-}
+
+    //Initial colorize color
+    const color = chroma(randomColor);
+    const sliders = div.querySelectorAll(".sliders input");
+    //console.log(sliders); TEST
+    const hue = sliders[0];
+    const brightness = sliders[1];
+    const saturation = sliders[2];
+
+    colorizeSliders(color, hue, brightness, saturation);
+  }); // Ends loop
+} // FUNCTION randomColors() END
+
 function checkTextContrast(color, text) {
   const luminance = chroma(color).luminance();
   if (luminance > 0.5) {
@@ -40,5 +53,23 @@ function checkTextContrast(color, text) {
   } else {
     text.style.color = "white";
   }
+} // Function checkTextContrast(color, text) end
+
+function colorizeSliders(color, hue, brightness, saturation) {
+  //Scale saturation
+  const no_Saturation = color.set("hsl.s", 0);
+  const full_Saturation = color.set("hsl.s", 1);
+  const scale_Saturation = chroma.scale([
+    no_Saturation,
+    color,
+    full_Saturation,
+  ]);
+
+  // Update input colors
+  saturation.style.background = `linear-gradient(to right,${scale_Saturation(
+    0
+  )}, ${scale_Saturation(1)})`;
 }
+
+//Function Call
 randomColors();
