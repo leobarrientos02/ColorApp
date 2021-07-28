@@ -10,6 +10,12 @@ sliders.forEach((slider) => {
   slider.addEventListener("input", hslControls);
 });
 
+colorDivs.forEach((div, index) => {
+  div.addEventListener("change", () => {
+    updateTestUI(index);
+  });
+});
+
 //Functions
 function generateHex() {
   const hexColor = chroma.random();
@@ -103,5 +109,10 @@ function hslControls(e) {
   colorDivs[index].style.background = color;
 } // Function hslControls() End
 
+function updateTestUI(index) {
+  const activeDiv = colorDivs[index];
+  const color = chroma(activeDiv.style.backgroundColor);
+  console.log(color);
+}
 //Function Call
 randomColors();
