@@ -55,7 +55,7 @@ svg {
   width: 80%;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
-  pointer-events: none;
+  /*pointer-events: none;*/
   /* Adjustment Class */
   /*transform: translateY(100px);*/
   transition: all 0.5s ease-in-out;

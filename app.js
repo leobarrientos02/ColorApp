@@ -56,20 +56,23 @@ function checkTextContrast(color, text) {
 } // Function checkTextContrast(color, text) end
 
 function colorizeSliders(color, hue, brightness, saturation) {
-  //Scale saturation
-  const no_Saturation = color.set("hsl.s", 0);
-  const full_Saturation = color.set("hsl.s", 1);
-  const scale_Saturation = chroma.scale([
-    no_Saturation,
-    color,
-    full_Saturation,
-  ]);
+  //Scale Saturation
+  const noSat = color.set("hsl.s", 0);
+  const fullSat = color.set("hsl.s", 1);
+  const scaleSat = chroma.scale([noSat, color, fullSat]);
+  //Scale Brightness
+  const midBright = color.set("hsl.l", 0.5);
+  const scaleBright = chroma.scale(["black", midBright, "white"]);
 
-  // Update input colors
-  saturation.style.background = `linear-gradient(to right,${scale_Saturation(
+  //Update Input Colors
+  saturation.style.backgroundImage = `linear-gradient(to right,${scaleSat(
     0
-  )}, ${scale_Saturation(1)})`;
-}
+  )}, ${scaleSat(1)})`;
+  brightness.style.backgroundImage = `linear-gradient(to right,${scaleBright(
+    0
+  )},${scaleBright(0.5)} ,${scaleBright(1)})`;
+  hue.style.backgroundImage = `linear-gradient(to right, rgb(204,75,75),rgb(204,204,75),rgb(75,204,75),rgb(75,204,204),rgb(75,75,204),rgb(204,75,204),rgb(204,75,75))`;
+} // Function colorSliders() End
 
 //Function Call
 randomColors();
