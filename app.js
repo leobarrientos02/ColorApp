@@ -117,6 +117,9 @@ function hslControls(e) {
     .set("hsl.h", hue.value);
 
   colorDivs[index].style.background = color;
+
+  // Colorize sliders
+  colorizeSliders(color, hue, brightness, saturation);
 } // Function hslControls() End
 
 function updateTestUI(index) {
