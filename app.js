@@ -34,10 +34,15 @@ function generateHex() {
 //console.log(randomHex); TEST
 
 function randomColors() {
+  initialColors = [];
   colorDivs.forEach((div, index) => {
     const hexText = div.children[0];
     const randomColor = generateHex();
 
+    //Add it to the array
+    //console.log(chroma(randomColor).hex()); TEST
+
+    initialColors.push(chroma(randomColor).hex());
     //Add the color to the background
     div.style.background = randomColor;
     hexText.innerText = randomColor;
@@ -98,8 +103,10 @@ function hslControls(e) {
   const brightness = sliders[1];
   const saturation = sliders[2];
 
-  const bgColor = colorDivs[index].querySelector("h2").innerText;
+  // const bgColor = colorDivs[index].querySelector("h2").innerText; OLD WAY, bug when relying on the text
   //console.log(bgColor); TEST
+  const bgColor = initialColors[index];
+  //console.log(`initialArr: ${bgColor}`); TEST
 
   let color = chroma(bgColor)
     .set("hsl.s", saturation.value)
