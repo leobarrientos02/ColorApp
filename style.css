@@ -69,7 +69,7 @@ svg {
   top: 0;
   right: 0;
   padding: 0.5rem;
-  border-bottom-right-radius: 1rem;
+  border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   border: none;
   background: rgb(73, 73, 73);

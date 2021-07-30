@@ -5,11 +5,13 @@ const sliders = document.querySelectorAll("input[type='range");
 const currentHexes = document.querySelectorAll(".color h2");
 const popup = document.querySelector(".copy-container");
 const adjustButton = document.querySelectorAll(".adjust");
+const lockButton = document.querySelectorAll(".lock");
 const closeAdjustments = document.querySelectorAll(".close-adjustment");
 const sliderContainers = document.querySelectorAll(".sliders");
 let initialColors;
 
 // Event listeners
+generateBtn.addEventListener("click", randomColors);
 sliders.forEach((slider) => {
   slider.addEventListener("input", hslControls);
 });
@@ -39,6 +41,7 @@ closeAdjustments.forEach((button, index) => {
     closeAdjustmentPanel(index);
   });
 });
+
 //Functions
 function generateHex() {
   const hexColor = chroma.random();
@@ -86,7 +89,15 @@ function randomColors() {
 
   //Resets Inputs
   resetInputs();
-} // FUNCTION randomColors() END
+
+  //Check for Button Contrast
+  adjustButton.forEach((button, index) => {
+    //console.log(button); TEST
+    //console.log(lockButton[index]); TEST
+    checkTextContrast(initialColors[index], button);
+    checkTextContrast(initialColors[index], lockButton[index]);
+  });
+} // Ends randomColors()
 
 function checkTextContrast(color, text) {
   const luminance = chroma(color).luminance();
@@ -158,7 +169,8 @@ function updateTestUI(index) {
   for (icon of icons) {
     checkTextContrast(color, icon);
   }
-}
+} // Ends updateTestUI()
+
 function resetInputs() {
   const sliders = document.querySelectorAll(".sliders input");
   sliders.forEach((slider) => {
@@ -182,6 +194,7 @@ function resetInputs() {
     }
   });
 } //Ends resetInputs() function
+
 function copyToClipboard(hex) {
   const el = document.createElement("textarea");
   el.value = hex.innerText;
@@ -195,13 +208,14 @@ function copyToClipboard(hex) {
   popup.classList.add("active");
   popupBox.classList.add("active");
 } // Ends copyToClipboard()
+
 function openAdjustmentPanel(index) {
   sliderContainers[index].classList.toggle("active");
-}
+} // Ends openAdjustmentPanel()
 
 function closeAdjustmentPanel(index) {
   sliderContainers[index].classList.remove("active");
-}
+} // Ends closeAdjustmentPanel()
 
 //Function Call
 randomColors();
