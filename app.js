@@ -21,7 +21,7 @@ sliders.forEach((slider) => {
 
 colorDivs.forEach((div, index) => {
   div.addEventListener("change", () => {
-    updateTestUI(index);
+    updateTextUI(index);
   });
 });
 currentHexes.forEach((hex) => {
@@ -170,7 +170,7 @@ function hslControls(e) {
   colorizeSliders(color, hue, brightness, saturation);
 } // Function hslControls() End
 
-function updateTestUI(index) {
+function updateTextUI(index) {
   const activeDiv = colorDivs[index];
   const color = chroma(activeDiv.style.backgroundColor);
   //console.log(color); TEST
@@ -183,7 +183,7 @@ function updateTestUI(index) {
   for (icon of icons) {
     checkTextContrast(color, icon);
   }
-} // Ends updateTestUI()
+} // Ends updateTextUI()
 
 function resetInputs() {
   const sliders = document.querySelectorAll(".sliders input");
@@ -307,6 +307,22 @@ function savePalette(e) {
   paletteBtn.classList.add(paletteObj.nr);
   paletteBtn.innerText = "Select";
 
+  //Attach event to the btn
+  paletteBtn.addEventListener("click", (e) => {
+    closeLibrary();
+    const paletteIndex = e.target.classList[1];
+    initialColors = [];
+    //console.log(savedPalettes); TEST
+    savedPalettes[paletteIndex].colors.forEach((color, index) => {
+      initialColors.push(color);
+      colorDivs[index].style.background = color;
+      const text = colorDivs[index].children[0];
+      checkTextContrast(color, text);
+      updateTextUI(index);
+    });
+    libraryInputUpdate();
+  });
+
   //Append to library
   palette.appendChild(title);
   palette.appendChild(preview);
@@ -337,5 +353,6 @@ function closeLibrary() {
   popup.classList.remove("active");
 } // Ends closeLibrary()
 
+function libraryInputUpdate() {}
 //Function Call
 randomColors();
