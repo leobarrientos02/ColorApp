@@ -239,3 +239,8 @@ input[type="range"] {
   background-color: white;
   color: red;
 }
+@media screen and (max-width: 754px) {
+  html {
+    font-size: 40%;
+  }
+}
