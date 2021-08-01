@@ -217,12 +217,14 @@ input[type="range"] {
 }
 .small-preview div {
   height: 5rem;
+  width: 2.5rem;
   flex: 1;
 }
 .close-library {
   border-top-right-radius: 0rem;
 }
-.pick-palette-btn {
+.pick-palette-btn,
+.erase-palette-btn {
   height: 5rem;
   border: none;
   padding: 1rem;
@@ -230,4 +232,10 @@ input[type="range"] {
   font-size: 1.2rem;
   background-color: rgb(41, 41, 41);
   color: white;
+}
+.erase-palette-btn {
+  font-size: 1rem;
+  text-decoration: underline;
+  background-color: white;
+  color: red;
 }
